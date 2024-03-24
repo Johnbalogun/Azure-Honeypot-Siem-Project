@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOffice 7.6.5.2 (Linux)"/>
+	<meta name="author" content="Westcott, Sophia"/>
+	<meta name="created" content="2024-03-24T16:09:00"/>
+	<meta name="changedby" content="Westcott, Sophia"/>
+	<meta name="changed" content="2024-03-24T16:09:00"/>
+	<meta name="AppVersion" content="16.0000"/>
+	<style type="text/css">
+		@page { size: 8.5in 11in; margin: 1in }
+		p { line-height: 115%; text-align: left; orphans: 2; widows: 2; margin-bottom: 0.1in; direction: ltr; background: transparent }
+	</style>
+</head>
+<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><p style="line-height: 108%; margin-bottom: 0.11in"><a name="_GoBack"></a>
+<b>Spun up a vulnerable virtual machine in Azure and make it
+discoverable and enticing.</b></p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><b>Create a
+resource group to house the virtual machine, when creating the vm, I
+created a new inbound rule that allows everything in for the sake of
+the honey pot test.</b></p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><img src="1a53c23686e12ecf107d6f38d2cf11fe_html_2ac67257.jpg" name="Picture 1" align="bottom" width="603" height="288" border="0"/>
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><b>Created a log
+repository in Azure called Log Analytic workspace which was used to
+ingest the logs from my virtual machine. Also Ingested the windows
+event logs and created custom logs with geo information to discover
+where the attacks were coming from</b></p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><img src="1a53c23686e12ecf107d6f38d2cf11fe_html_8992b7df.jpg" name="Picture 4" align="bottom" width="606" height="286" border="0"/>
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><br/>
+<br/>
+
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><br/>
+<br/>
+
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><br/>
+<br/>
+
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><b>Set up Azure
+Sentinel within Azure, Microsoft’s cloud native Siem which was
+connected to the log analytic workspace to create a map while
+tracking all the attacker data i.e country, latitude and longitude. </b>
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><img src="1a53c23686e12ecf107d6f38d2cf11fe_html_c89d5e62.png" name="Picture 7" align="bottom" width="623" height="271" border="0"/>
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><br/>
+<br/>
+
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><b>Logged into my
+VM remotely via windows remote desktop using the Vm’s public IP
+address</b></p>
+<p align="center" style="line-height: 108%; margin-bottom: 0.11in"><img src="1a53c23686e12ecf107d6f38d2cf11fe_html_76e8f2ed.png" name="Picture 2" align="bottom" width="269" height="289" border="0"/>
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><br/>
+<br/>
+
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><br/>
+<br/>
+
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><br/>
+<br/>
+
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><br/>
+<br/>
+
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><b>Turned off the
+firewall in windows defender for more easy discovery and observed the
+event viewer logs to see the security events attempted log ins.</b></p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><b>Made use of
+PowerShell to extract the IP addresses from the windows logs sending
+it to a third-party API to derive the necessary details and send it
+back to the custom machine which created a custom log with geographic
+data inside.</b></p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><img src="1a53c23686e12ecf107d6f38d2cf11fe_html_1053951b.png" name="Picture 9" align="bottom" width="623" height="372" border="0"/>
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><b>I inserted a
+custom API key (highlighted) into the readymade PowerShell script
+below in order to get the geo data   </b>
+<img src="1a53c23686e12ecf107d6f38d2cf11fe_html_e3d79c46.png" name="Picture 8" align="bottom" width="624" height="360" border="0"/>
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><b>I created
+custom fields and extract fields in log analytics for the data that’s
+being extracted. I then went on to set up the geo map in sentinel ran
+the query </b>
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><font color="#131313"><font face="Arial, serif"><font size="1" style="font-size: 8pt">&lt;&lt;
+FAILED_RDP_WITH_GEO_CL | summarize event_count=count() by
+sourcehost_CF, latitude_CF, longitude_CF, country_CF, label_CF,
+destinationhost_CF | where destinationhost_CF != &quot;samplehost&quot;
+| where sourcehost_CF != &quot;&quot; &gt;&gt;</font></font></font></p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><b>For the map to
+plot out the attack locations.</b><img src="1a53c23686e12ecf107d6f38d2cf11fe_html_b13cbdb5.png" name="Picture 16" align="bottom" width="623" height="301" border="0"/>
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><br/>
+<br/>
+
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><b>More attempted
+brute force attacks came in over time from different countries</b></p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><img src="1a53c23686e12ecf107d6f38d2cf11fe_html_366a9c20.png" name="Picture 11" align="bottom" width="621" height="298" border="0"/>
+</p>
+<table width="262" cellpadding="7" cellspacing="0">
+	<col width="116"/>
+	<col width="116"/>
+	<tr valign="top">
+		<td width="116" height="1" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<font face="Calibri, serif"><font size="2" style="font-size: 11pt"><b>Locations</b></font></font></p>
+		</td>
+		<td width="116" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<font face="Calibri, serif"><font size="2" style="font-size: 11pt"><b>Attempts</b></font></font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="116" height="2" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<font face="Calibri, serif"><font size="2" style="font-size: 11pt"><b>Russia</b></font></font></p>
+		</td>
+		<td width="116" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<font face="Calibri, serif"><font size="2" style="font-size: 11pt"><b>2600</b></font></font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="116" height="2" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<font face="Calibri, serif"><font size="2" style="font-size: 11pt"><b>Austria</b></font></font></p>
+		</td>
+		<td width="116" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<font face="Calibri, serif"><font size="2" style="font-size: 11pt"><b>432</b></font></font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="116" height="1" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<font face="Calibri, serif"><font size="2" style="font-size: 11pt"><b>Indonesia</b></font></font></p>
+		</td>
+		<td width="116" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<font face="Calibri, serif"><font size="2" style="font-size: 11pt"><b>134</b></font></font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="116" height="2" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<font face="Calibri, serif"><font size="2" style="font-size: 11pt"><b>Germany</b></font></font></p>
+		</td>
+		<td width="116" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<font face="Calibri, serif"><font size="2" style="font-size: 11pt"><b>36</b></font></font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="116" height="2" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<font face="Calibri, serif"><font size="2" style="font-size: 11pt"><b>China</b></font></font></p>
+		</td>
+		<td width="116" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<font face="Calibri, serif"><font size="2" style="font-size: 11pt"><b>33</b></font></font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="116" height="2" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<font face="Calibri, serif"><font size="2" style="font-size: 11pt"><b>United
+			States</b></font></font></p>
+		</td>
+		<td width="116" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<font face="Calibri, serif"><font size="2" style="font-size: 11pt"><b>14</b></font></font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="116" height="2" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<font face="Calibri, serif"><font size="2" style="font-size: 11pt"><b>Unknown</b></font></font></p>
+		</td>
+		<td width="116" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<font face="Calibri, serif"><font size="2" style="font-size: 11pt"><b>12</b></font></font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="116" height="2" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<font face="Calibri, serif"><font size="2" style="font-size: 11pt"><b>United
+			Kingdom</b></font></font></p>
+		</td>
+		<td width="116" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<font face="Calibri, serif"><font size="2" style="font-size: 11pt"><b>1</b></font></font></p>
+		</td>
+	</tr>
+	<tr valign="top">
+		<td width="116" height="1" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<font face="Calibri, serif"><font size="2" style="font-size: 11pt"><b>Netherlands</b></font></font></p>
+		</td>
+		<td width="116" style="border: 1px solid #000000; padding: 0in 0.08in"><p align="left" style="orphans: 2; widows: 2">
+			<font face="Calibri, serif"><font size="2" style="font-size: 11pt"><b>1</b></font></font></p>
+		</td>
+	</tr>
+</table>
+<p style="line-height: 108%; margin-bottom: 0.11in"><br/>
+<br/>
+
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><u><b>Conclusion</b></u></p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><font size="2" style="font-size: 10pt"><b>I
+enhanced the security of Azure resources by implementing several
+hardening measures and security controls:</b></font></p>
+<ol>
+	<li><p style="line-height: 108%; margin-bottom: 0.11in"><font size="2" style="font-size: 10pt"><b>Network
+	Security Groups (NSGs):</b></font><font size="2" style="font-size: 10pt"><b>
+	NSGs were tightened by blocking all inbound and outbound traffic
+	except for connections originating from authorized sources, such as
+	my own public IP address. This ensured that only trusted traffic
+	could access the virtual machines.</b></font></p></li>
+	<li><p style="line-height: 108%; margin-bottom: 0.11in"><font size="2" style="font-size: 10pt"><b>Built-in
+	Firewalls:</b></font><font size="2" style="font-size: 10pt"><b> The
+	built-in firewalls on the virtual machines were configured to impose
+	strict access controls, safeguarding the resources from unauthorized
+	connections. Fine-tuning of firewall rules was conducted to tailor
+	protection to the specific needs of each VM, thereby reducing the
+	potential attack surface.</b></font></p></li>
+	<li><p style="line-height: 108%; margin-bottom: 0.11in"><font size="2" style="font-size: 10pt"><b>Private
+	Endpoints:</b></font><font size="2" style="font-size: 10pt"><b>
+	Public endpoints were replaced with Private Endpoints to bolster the
+	security of Azure resources. This measure restricted access to
+	sensitive resources, such as storage accounts and databases, solely
+	to the virtual network, shielding them from exposure to the public
+	internet. Consequently, these resources were safeguarded against
+	unauthorized access and potential attacks.</b></font></p></li>
+</ol>
+<p style="line-height: 108%; margin-bottom: 0.11in"><br/>
+<br/>
+
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><br/>
+<br/>
+
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><br/>
+<br/>
+
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><br/>
+<br/>
+
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><br/>
+<br/>
+
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><br/>
+<br/>
+
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><br/>
+<br/>
+
+</p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><b>Honey Pot
+Project Password</b></p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><b>Username:
+Honeypot_vm</b></p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><b>HoneypotProject!</b></p>
+<p style="line-height: 108%; margin-bottom: 0.11in"><br/>
+<br/>
+
+</p>
+</body>
+</html>
