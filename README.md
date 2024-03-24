@@ -43,26 +43,7 @@ Several attacks were logged and plotted on different parts of the map
 
 <img src="https://i.imgur.com/IzvAtTp.png[/img]" alt="Brute Force Attacks" width="621" height="298">
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Attempts by Location</title>
-<style>
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-    th, td {
-        border: 1px solid #000;
-        padding: 8px;
-        text-align: left;
-    }
-    th {
-        background-color: #f2f2f2;
-    }
-</style>
+
 </head>
 <body>
 
