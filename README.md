@@ -5,6 +5,7 @@
 <h1> </h1>
 
 <h2>Description</h2>
+<h1> 
 
 In this project i spun up a vulnerable virtual machine in Azure acting as a HoneyPot for attacks, Ingested logs of the Attempts and plotted it on a world map. After some observation I then Hardened the security of the environment.
 <br />
@@ -18,7 +19,7 @@ Azure Log Analytics <br />
 <h1> </h1>
 
 <h2> Walk-through:</h2>
-<h1> </h1>
+<h1> 
 
 <p align="center">
 
