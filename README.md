@@ -18,6 +18,7 @@ Azure Log Analytics <br />
 <h1> </h1>
 
 <h2> Walk-through:</h2>
+<h1> </h1>
 
 <p align="center">
 
