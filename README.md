@@ -1,3 +1,25 @@
+
+
+<h1> </h1>
+
+<h2>Description</h2>
+
+In this project i spun up a vulnerable virtual machine in Azure acting as a HoneyPot for attacks, Ingested logs of the Attempts and plotted it on a world map. After some observation I then Hardened the security of the environment.
+
+<br />
+<h2>Tools and Utilities Used</h2>
+Azure Sentinal <br />
+Windows Remote Desktop
+PowerShell
+Windows Firewall <br />
+Azure Log Analytics
+ <br />
+ <br />
+
+<h2> Walk-through:</h2>
+
+<p align="center">
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
