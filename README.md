@@ -1,9 +1,9 @@
-0</head>
+</head>
 <body>
 <h1>Azure Siem HoneyPot Project</h1>
 
 <h2>Description</h2>
-<h1> 
+<h1></h1>
 
 In this project i spun up a vulnerable virtual machine in Azure acting as a HoneyPot for attacks, Ingested logs of the Attempts and plotted it on a world map. After some observation I then Hardened the security of the environment.
 <br />
@@ -13,12 +13,10 @@ Windows Remote Desktop <br />
 PowerShell <br />
 Windows Firewall <br />
 Azure Log Analytics <br />
-<br />
-
 <h1> </h1>
 
 <h2> Walk-through:</h2>
-<h1> 
+<h1> </h1>
 
 <p align="center">
 
@@ -33,7 +31,7 @@ Azure Log Analytics <br />
   
 <img src="https://i.imgur.com/onL3WI1.png" width="603" height="288">
 
-<p><b>Created a log repository in Azure called Log Analytic workspace which was used to ingest the logs from my virtual machine. Also Ingested the windows event logs and created custom logs with geo information to discover where the attacks were coming from</b></p>
+<p><b>Created a log repository in Azure called Log Analytic workspace which was used to ingest the logs from my virtual machine. Also Ingested the windows event logs and created custom logs with geo information to discover where the attacks were coming from.</b></p>
 
 <img src="https://i.imgur.com/o5nriay.jpeg[/img]" alt="Log Analytics" width="606" height="286">
 
@@ -49,18 +47,18 @@ Azure Log Analytics <br />
 
 <img src="https://i.imgur.com/tOGZmbH.png[/img]" width="623" height="372">
 
-<p><b>I inserted a custom API key (highlighted) into the readymade PowerShell script below in order to get the geo data</b></p>
+<p><b>I inserted a custom API key (highlighted) into the readymade PowerShell script below in order to get the geo data.</b></p>
 
 <img src="https://i.imgur.com/AV4dMkU.png[/img]" alt="Custom API Key" width="624" height="360">
 
 <p><b>I created custom fields and extract fields in log analytics for the data that’s being extracted. I then went on to set up the geo map in Sentinel and ran the query</b></p>
 <pre>&lt;&lt; FAILED_RDP_WITH_GEO_CL | summarize event_count=count() by sourcehost_CF, latitude_CF, longitude_CF, country_CF, label_CF, destinationhost_CF | where destinationhost_CF != "samplehost" | where sourcehost_CF != "" &gt;&gt;</pre>
 
-Several attacks were logged and plotted on different parts of the map
+Several attacks were logged and plotted on different parts of the map.
 
 <img src="https://i.imgur.com/QMmdumj.png[/img]" alt="Geo Map" width="623" height="301">
 
-<p><b>More attempted brute force attacks came in over time from different countries</b></p>
+<p><b>More attempted brute force attacks came in over time from different countries.</b></p>
 
 <img src="https://i.imgur.com/IzvAtTp.png[/img]" alt="Brute Force Attacks" width="621" height="298">
 
