@@ -14,7 +14,7 @@ Windows Remote Desktop <br />
 PowerShell <br />
 Windows Firewall <br />
 Azure Log Analytics <br />
- <br />
+<br />
 <h2> Walk-through:</h2>
 
 <p align="center">
