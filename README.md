@@ -1,4 +1,4 @@
-</head>
+0</head>
 <body>
 <h1>Azure Siem HoneyPot Project</h1>
 
@@ -31,7 +31,7 @@ Azure Log Analytics <br />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <p><b>Spun up a vulnerable virtual machine in Azure and made it discoverable and enticing.</b></p>
-<p><b>Create a resource group to house the virtual machine, when creating the VM, I created a new inbound rule that allows everything in for the sake of the honey pot test.</b></p>
+<p><b>Create a resource group to house the virtual machine, when creating the VM, I created a new inbound rule that allows everything in for the sake of the honey pot test.</b></p>/li>
   
 <img src="https://i.imgur.com/onL3WI1.png" width="603" height="288">
 
