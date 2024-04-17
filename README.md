@@ -3,20 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
 <body>
 
 <h1>Azure Siem HoneyPot Project</h1>
 
 <h2>Description</h2>
-<p>In this project i spun up a vulnerable virtual machine in Azure acting as a HoneyPot for attacks, Ingested logs of the Attempts and plotted it on a world map. After some observation I then Hardened the security of the environment.</p>
+<p>In this project I spun up a vulnerable virtual machine in Azure acting as a HoneyPot for attacks, ingested logs of the attempts, and plotted them on a world map. After some observation, I then hardened the security of the environment.</p>
 
 <h2>Tools and Utilities Used</h2>
-<p>Azure Sentinal <br />
-Windows Remote Desktop <br />
-PowerShell <br />
-Windows Firewall <br />
-Azure Log Analytics</p>
+<ul>
+    <li>Azure Sentinel</li>
+    <li>Windows Remote Desktop</li>
+    <li>PowerShell</li>
+    <li>Windows Firewall</li>
+    <li>Azure Log Analytics</li>
+</ul>
 
 <h2>Walk-through:</h2>
 
@@ -94,12 +97,12 @@ Azure Log Analytics</p>
     </tr>
 </table>
 
-<p><b>Conclusion</b></p>
-<p><b>I enhanced the security of Azure resources by implementing several hardening measures and security controls:</b></p>
+<h2>Conclusion</h2>
+<p>I enhanced the security of Azure resources by implementing several hardening measures and security controls:</p>
 <ol>
-    <li><p><b>Network Security Groups (NSGs):</b> NSGs were tightened by blocking all inbound and outbound traffic except for connections originating from authorized sources, such as my own public IP address. This ensured that only trusted traffic could access the virtual machines.</p></li>
-    <li><p><b>Built-in Firewalls:</b> The built-in firewalls on the virtual machines were configured to impose strict access controls, safeguarding the resources from unauthorized connections. Fine-tuning of firewall rules was conducted to tailor protection to the specific needs of each VM, thereby reducing the potential attack surface.</p></li>
-    <li><p><b>Private Endpoints:</b> Public endpoints were replaced with Private Endpoints to bolster the security of Azure resources. This measure restricted access to sensitive resources, such as storage accounts and databases, solely to the virtual network, shielding them from exposure to the public internet. Consequently, these resources were safeguarded against unauthorized access and potential attacks.</p></li>
+    <li><b>Network Security Groups (NSGs):</b> NSGs were tightened by blocking all inbound and outbound traffic except for connections originating from authorized sources, such as my own public IP address. This ensured that only trusted traffic could access the virtual machines.</li>
+    <li><b>Built-in Firewalls:</b> The built-in firewalls on the virtual machines were configured to impose strict access controls, safeguarding the resources from unauthorized connections. Fine-tuning of firewall rules was conducted to tailor protection to the specific needs of each VM, thereby reducing the potential attack surface.</li>
+    <li><b>Private Endpoints:</b> Public endpoints were replaced with Private Endpoints to bolster the security of Azure resources. This measure restricted access to sensitive resources, such as storage accounts and databases, solely to the virtual network, shielding them from exposure to the public internet. Consequently, these resources were safeguarded against unauthorized access and potential attacks.</li>
 </ol>
 
 </body>
