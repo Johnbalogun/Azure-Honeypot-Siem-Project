@@ -9,8 +9,6 @@
 <h1>Azure Siem HoneyPot Project</h1>
 
 <h2>Description</h2>
-<h1></h1>
-
 <p>In this project i spun up a vulnerable virtual machine in Azure acting as a HoneyPot for attacks, Ingested logs of the Attempts and plotted it on a world map. After some observation I then Hardened the security of the environment.</p>
 
 <h2>Tools and Utilities Used</h2>
@@ -106,7 +104,3 @@ Azure Log Analytics</p>
 
 </body>
 </html>
-
-
-
-
